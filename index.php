@@ -45,7 +45,7 @@ if (isset($_POST['submit'])) {
     }
 
     for ($i = 0; $i < $jumlah; $i++) {
-        $result = sendRequest($formula, 'POST'); // Ganti 'GET' dengan metode yang sesuai (GET, POST, PUT, dll.)
+        $result = sendRequest($formula, 'POST');
         if ($result['http_code'] == 200) {
             $response = json_decode($result['response']);
 
@@ -55,7 +55,6 @@ if (isset($_POST['submit'])) {
             $chat_id = $response->result->chat->id;
             $text = $response->result->text;
 
-            // Lakukan sesuatu dengan informasi yang diambil dari respons API
             echo "
             <div class='alert alert-success' role='alert'>
                 Pesan ke-$i: Message ID: $message_id, Dari: $from_first_name, Chat ID: $chat_id, Text: $text
@@ -65,11 +64,9 @@ if (isset($_POST['submit'])) {
             $errorResponse = json_decode($result['response']);
             $error_code = $errorResponse->error_code;
             $description = $errorResponse->description;
-
-            // Mengecek apakah respons gagal
+            
             $isSuccess = false;
 
-            // Menampilkan pesan kesalahan dengan warna merah
             echo "
             <div class='alert alert-danger' role='alert'>
                 Permintaan API ke-$i gagal dengan kode HTTP: " . $result['http_code'] . ", Error Code: $error_code, Description: $description
@@ -77,8 +74,7 @@ if (isset($_POST['submit'])) {
         ";
         }
     }
-    // Catatan: Pastikan Anda mengganti URL API, metode HTTP, dan logika pengolahan respons sesuai dengan kebutuhan Anda.
-
+=
 }
 ?>
 <body>
